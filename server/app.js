@@ -2,6 +2,9 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import authRoute from "./routes/authRoute.js";
+import privateRoute from "./routes/privateRoute.js";
+// Add Error.js
+import errorHandler from "./middleware/error.js";
 
 const app = express();
 
@@ -13,6 +16,10 @@ app.use(cors());
 
 // Routes
 app.use("/", authRoute);
+app.use("/private", privateRoute);
+
+// ErrorHandler (should be last piece of middleware)
+app.use(errorHandler);
 
 
 export default app;
